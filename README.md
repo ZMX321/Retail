@@ -108,6 +108,7 @@ Response Body:
 ### Exception Handler
 To prevent NullPointerException, when getting a non-exist customer or receipt, the system will throw an IllegalArgumentException. And the exception handler will catch that and return messages.
 e.g.
+
 ```json
 Cannot find the customer.
 ```
