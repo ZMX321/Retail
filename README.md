@@ -105,6 +105,12 @@ Response Body:
     "createDate": "2023-02-04T08:00:00.000+00:00"
 }
 ```
+### Exception Handler
+To prevent NullPointerException, when getting a non-exist customer or receipt, the system will throw an IllegalArgumentException. And the exception handler will catch that and return messages.
+e.g.
+```json
+Cannot find the customer.
+```
 
  
 
