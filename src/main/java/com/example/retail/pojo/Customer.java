@@ -3,7 +3,7 @@ package com.example.retail.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,23 +17,32 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 
-    public List<Customer_Order> getCustomer_orderList() {
-        return customer_orderList;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Receipt> receiptList;
+
+    public List<Receipt> getReceiptList() {
+        return receiptList;
     }
 
-    public void setCustomer_orderList(List<Customer_Order> customer_orderList) {
-        this.customer_orderList = customer_orderList;
+    public void setReceiptList(List<Receipt> receiptList) {
+        this.receiptList = receiptList;
     }
 
-    @OneToMany(mappedBy = "c", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Customer_Order> customer_orderList;
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", receiptList=" + receiptList +
+                '}';
+    }
 }
